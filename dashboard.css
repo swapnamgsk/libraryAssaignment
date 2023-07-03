@@ -1,0 +1,14 @@
+body
+{
+	border : 1px solid black;
+	background-image : url('https://t3.ftcdn.net/jpg/03/00/54/68/240_F_300546837_3tzFIQ89Bu4w9hibhD1hHxBrd2CUCt65.jpg');
+	background-size : cover;
+}
+#logout
+{
+	padding : 10px 20px;
+	margin-right : 400px;
+	margin-left : 680px;
+	margin-top : 10px;
+	border : 1px solid black;
+}

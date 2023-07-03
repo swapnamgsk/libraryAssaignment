@@ -1,0 +1,72 @@
+<html>
+<head>
+	<title>all books data</title>
+	<link rel = "stylesheet" href = "AllbooksData.css"/>
+</head>
+<body>
+		<div id = "main">
+			<div id = "navbar">
+				<a id = "home" href = "libraryHomePage.html">Home</a>
+				<a href = "DetailsPage.html" id = "one">Add Book</a>
+				<a href = "AllbooksData.html" id = "two">All Books</a>
+				
+			</div>
+		</div>
+		<h1 id = "head">All Books</h1>
+		<div id = "main">All Books</div>
+		
+		
+</body>
+<script>
+	let div = document.querySelector("#main");
+	div.style.display = "flex";
+	div.style.flexWrap = "wrap";
+	let result = JSON.parse(localStorage.getItem("bookDetails")) || [];
+	//div.append(result);
+	
+	div.setAttribute("class","settop");
+	
+	
+	for(let i =0;i<result.length;i++)
+	{
+		let store = document.createElement("div");
+		store.setAttribute("id","store");
+		let smallstore = document.createElement("div");
+		smallstore.setAttribute("id","smallstore");
+	
+		let name = document.createElement("div");
+		name.innerText = "BookName : "+ result[i].name;
+		name.setAttribute("id","name");
+		
+		let author = document.createElement("div");
+		author.innerText = "AuthorName : " +result[i].author;
+		author.setAttribute("id","author");
+		
+		let publisher = document.createElement("div");
+		publisher.innerText ="pubilsher : " +result[i].publisher;
+		publisher.setAttribute("id","publisher");
+		
+		let imgdiv = document.createElement("div");
+		imgdiv.setAttribute("id","imgdiv");
+		let img = document.createElement("img");
+		let image = img.setAttribute("src",result[i].avatar);
+		img.append(image);
+		img.setAttribute("id","img");
+		imgdiv.append(img);
+		
+		smallstore.append(name,author,publisher);
+		store.append(imgdiv,smallstore);
+		store.setAttribute("onClick",`functionname(${i})`);
+		//console.log(store);
+		div.append(store);
+		
+		function functionname(i)
+		{
+			localStorage.setItem("data",JSON.stringify(result[i]));
+			window.location.href = "oneBookDetails.html";	
+			
+		}
+	
+	}
+</script>
+</html>

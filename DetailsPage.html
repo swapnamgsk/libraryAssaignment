@@ -1,0 +1,72 @@
+<html>
+<head>
+	<title>storing details of the library in local storage</title>
+	<link rel = "stylesheet" href = "DetailsPage.css"></link>
+</head>
+<body>
+	<div class = "cont">
+		
+		<div id = "main">
+			<div id = "navbar">
+				<a id = "home" href = "libraryHomePage.html">Home</a>
+				<a href = "DetailsPage.html" id = "one">Add Book</a>
+				<a href = "AllbooksData.html" id = "two">All Books</a>
+			</div>
+		</div>
+		<div id = "details">
+			<div id = "box1">
+				<h2>Book Name</h2>
+				<input type = "text" placeholder = "Name" id = "name"></input>
+				<h2>Author Name</h2>
+				<input type = "text" placeholder = "Author" id = "author"></input>
+				<h2>Price</h2>
+				<input type = "number" placeholder = "Price" id = "price"></input>
+				<h2>Year</h2>
+				<input type = "number" placeholder = "Year" id = "year"></input>
+			</div>
+			<div id = "box2">
+				<h2>Type</h2>
+				<input type = "text" placeholder = "Type" id = "type"></input>
+				<h2>Publisher</h2>
+				<input type = "text" placeholder = "Publisher" id = "publisher"></input>
+				<h2>Serial</h2>
+				<input type = "number" placeholder = "Serial Number" id = "serial"></input>
+				<h2>Rate</h2>
+				<input type = "number" placeholder = "rate" id = "rate"></input>
+			</div>	
+		</div>
+		<button id = "btn">click</button>
+	</div>
+</body>
+<script>
+	let result = JSON.parse(localStorage.getItem("bookDetails"));
+	console.log(result);
+	
+	let button = document.querySelector("#btn");
+	button.onclick= function()
+	{
+		let name = document.querySelector("#name").value;
+		let author = document.querySelector("#author").value;
+		let price = document.querySelector("#price").value;
+		let year = document.querySelector("#year").value;
+		let type = document.querySelector("#type").value;
+		
+		let publisher = document.querySelector("#publisher").value;
+		let serial = document.querySelector("#serial").value;
+		let rate = document.querySelector("#rate").value;
+		if(name === "" ||author === ""||price === ""||year === ""||type === ""||publisher === ""||serial === ""||rate === "")
+		{
+			alert("please give the details of book");
+			return;
+		}
+		else{
+			localStorage.setItem("bookDetails",JSON.stringify([...result,{name,author,price,year,type,publisher,serial,rate}]));
+			
+			alert("successfully added a book");
+		}
+		window.location.href = "AllbooksData.html";
+	}
+	
+	
+</script>
+</html>

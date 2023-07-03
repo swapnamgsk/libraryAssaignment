@@ -1,0 +1,115 @@
+<html>
+<head>
+	<title></title>
+	<link rel = "stylesheet" href = "signIn Page.css"/>
+</head>
+<body>
+	
+	<div id = "container">
+		<h2>Name  : </h2>
+		<input type = "text" placeholder = "Name" id = "name"></input>
+		<h2>User name  : </h2>
+		<input type = "text" placeholder = "User Name" id = "username"></input>
+		<h2>E-mail  : </h2>
+		<input type = "email" placeholder = "Mail" id = "mail"></input>
+		<h2>Password  : </h2>
+		<input type = "password" placeholder = "Password" id = "password"></input>
+		<button type="button" id="show-password">show</button>
+		<h2>Mobile number : </h2>		
+		<input type = "number" placeholder = "Phone number" id = "phone"></input><br>
+		<button id = "btn">SignUp</button>
+		<p>Already you have Account please login. <a href= "loginPage.html">login</a></p>
+	</div>
+</body>
+<script>
+	let button = document.querySelector("#btn");
+	let result = JSON.parse(localStorage.getItem("data")) || [];
+	
+	if (!Array.isArray(result))
+	{
+  		result = [];
+	}
+
+	
+	let mail = document.querySelector("#mail").value;
+	function validateEmail(mail)
+	{
+	  	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	  	return emailRegex.test(mail);
+	}
+
+
+	let password = document.querySelector("#password").value;
+	function validatePassword(password)
+	{
+	  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/;
+	  return passwordRegex.test(password);
+	}
+
+	let number = document.querySelector("#phone").value;
+	function validateMobileNumber(number) 
+	{
+	  const mobileNumberRegex = /^[1-9]\d{9}$/;
+	  return mobileNumberRegex.test(number);
+	}
+	const passwordInput = document.querySelector("#password");
+	const showPasswordButton = document.querySelector("#show-password");
+
+	showPasswordButton.addEventListener("click", () =>
+	{
+	  if (passwordInput.type === "password") 
+	  {
+	    passwordInput.type = "text";
+	    showPasswordButton.textContent = "Show";
+	  } 
+	  else
+	  {
+	    passwordInput.type = "password";
+	    showPasswordButton.textContent = "Hide";
+	  }
+	});	
+	
+	
+	button.onclick = function()
+	{
+		let name = document.querySelector("#name").value;
+		let user = document.querySelector("#username").value;
+		let mail = document.querySelector("#mail").value;
+		let password = document.querySelector("#password").value;
+		let number = document.querySelector("#phone").value;
+
+			for(let i = 0;i<result.length;i++)
+			{
+				if(name == "" || user == "" || password == "" || number == "")
+				{
+					alert("please fill all details");
+					return;
+				}
+				else if(result[i].user === user)
+				{
+					alert("alredy you have account");
+					return;
+				}
+				else if (mail === "" || !validateEmail(mail)) {
+   					 alert("Please enter a valid email address.");
+   					 return;
+ 				 }
+ 				 else if (!validatePassword(password)) {
+    					alert("Please enter a valid password. Your password must contain at least 8 characters, including at least one 			lowercase letter, one uppercase letter, one number, and one special character.");
+    					return;
+				  }
+				  
+				  if (number === "" || !validateMobileNumber(number)) {
+				    alert("Please enter a valid mobile number.");
+				    return;
+				  }
+			}					
+		console.log(name,user,mail,password,number);
+		localStorage.setItem("data",JSON.stringify([...result,{name,user,mail,password,number}]));
+		
+		alert("successfully created");
+		window.location.href = "loginPage.html";
+		
+	}	
+</script>
+</html>

@@ -1,0 +1,72 @@
+<html>
+<head>
+	<title>login page</title>
+	<link rel = "stylesheet" href = " libraryLoginPage.css"/>
+</head>
+<body>
+	<div id = "main">
+		<h2>User Name  : </h2>
+		<input type = "text" placeholder = "User Name" id = "username"></input>
+		<h2>Password  : </h2>
+		<input type = "password" placeholder = "Password" id = "password"></input>
+		<button type="button" id="show-password">Show</button>
+		<h2>Admin code  : </h2>
+		<input type = "text" placeholder = "Admin code" id = "admin"></input>
+		<button id = "btn">login</button>
+		<p>You have no account, please create account and sign up. <a href= "librarySigninPage.html">sign up</a></p>
+		
+		<p><a href= "libraryForgot.html">Forgot password</a></p>
+	</div>
+</body>
+<script>
+
+
+const passwordInput = document.querySelector("#password");
+const showPasswordButton = document.querySelector("#show-password");
+
+showPasswordButton.addEventListener("click", () => {
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    showPasswordButton.textContent = "Hide";
+  } else {
+    passwordInput.type = "password";
+    showPasswordButton.textContent = "Show";
+  }
+});	
+
+			let button = document.getElementById("btn");
+			
+			let result = JSON.parse(localStorage.getItem("data")) || [];
+			let admin = localStorage.getItem("AdminCode","swapna@123");
+			
+			button.onclick = function(){
+				let text = document.querySelector("#username").value;
+				let text1 = document.querySelector("#password").value;
+				let regCode = document.querySelector("#admin").value;
+			
+				if(text === "" && text1 === "" && regCode == "")
+				{
+					alert("fill all the information");
+					return;
+
+				}
+					
+				for(let i=0;i<result.length;i++)
+				{
+	
+					if(result[i].user === text && result[i].password === text1 && result[i].admin == regCode)
+					{
+						alert("succfully login");
+						localStorage.setItem("loggedUser", JSON.stringify(result[i]));
+						window.location.href = "libraryHomePage.html";
+						return
+						
+					}
+				}
+				alert("you have no account please create account");
+				
+				
+			}
+			
+</script>
+</html>

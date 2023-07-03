@@ -1,0 +1,76 @@
+<html>
+<head>
+	<title>dash Board</title>
+	<link rel = "stylesheet" href = "dashboard.css"/>
+<head>
+<body>
+	<div id = "cont"></div>
+	<div id = "main">
+		<button id = "logout">Log out</button>
+	</div>
+	
+</body>
+<script>
+	let main = document.querySelector("#cont");
+	
+	let result = JSON.parse(localStorage.getItem("loggedUser"));
+	let store = document.createElement("div");
+	store.style.width = "400px";
+	store.style.height = "300px";
+	store.style.border = "1px solid black";
+	store.style.margin = "auto";
+	store.style.marginTop = "150px";
+	store.style.backgroundColor= "none";
+	//store.style.color = "white";
+	
+	
+	let div1 = document.createElement("div");
+	div1.innerText = "Name  : "+result.name;
+	div1.style.padding = "10px";
+	div1.style.border = "1px solid black";
+	div1.style.marginTop  = "40px";
+	div1.style.marginLeft = "10px";
+	div1.style.marginRight = "10px";
+	div1.style.fontSize = "20px";
+	
+	let div2 = document.createElement("div");
+	div2.innerText = "userName : "+result.user;
+	div2.style.padding = "10px";
+	div2.style.border = "1px solid black";
+	div2.style.marginTop  = "10px";
+	div2.style.marginLeft = "10px";
+	div2.style.marginRight = "10px";
+	div2.style.fontSize = "20px";
+	
+	let div3 = document.createElement("div");
+	div3.innerText = "mail : " +result.mail;
+	div3.style.padding = "10px";
+	div3.style.border = "1px solid black";
+	div3.style.marginTop  = "10px";
+	div3.style.marginLeft = "10px";
+	div3.style.marginRight = "10px";
+	div3.style.fontSize = "20px";
+	
+	let div4 = document.createElement("div");
+	div4.innerText = "Phone number : "+result.number;
+	div4.style.padding = "10px";
+	div4.style.border = "1px solid black";
+	div4.style.marginTop  = "10px";
+	div4.style.marginLeft = "10px";
+	div4.style.marginRight = "10px";
+	div4.style.fontSize = "20px";
+	
+	store.append(div1,div2,div3,div4);
+	main.append(store);
+	
+	let button = document.querySelector("#logout");
+	button.onclick = function()
+	{
+		localStorage.removeItem("loggedUser");
+		alert("your data is deleted");
+		window.location.href = "loginPage.html";
+	}
+	 
+</script>
+</html>
+

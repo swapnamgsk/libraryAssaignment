@@ -1,0 +1,78 @@
+<html>
+<head>
+	<title>forgot password</title>
+	<link rel = "stylesheet" href = "libraryForgot.css"/>
+</head>
+<body>
+	<h3>Forgot Password</h3>
+	<div id = "main">
+		<h2>User Name : </h2>
+		<input type = "text" placeholder = "UserName" id = "userName"></input>
+		<h2>New Password : </h2>
+		<input type = "text"  placeholder = "New Password" id = "newPassword"></input>
+		<h2>Confirm Password : </h2>
+		<input type = "text" placeholder = "Confirm Password" id = "confirmPassword"></input>
+		<button id = "btn">Update</button>
+	</div>
+</body>
+	
+
+
+
+<script>
+			let complete = JSON.parse(localStorage.getItem("data")) || [];
+			let button = document.querySelector("#btn");
+				
+		button.onclick = function()
+		{
+			
+			let userName = document.querySelector("#userName").value;
+			let password = document.querySelector("#newPassword").value;
+			let confirm = document.querySelector("#confirmPassword").value;
+			
+			if(userName === "" ||password === "" ||confirm === "" )
+			{
+				alert("please enter the information");
+				return
+			}
+			else if(password == confirm)
+			{
+				let array = [];
+				for(let i = 0; i < complete.length; i++)
+				{
+					if(complete[i].user == userName)
+					{
+						if(complete[i].password!= password)
+						{
+							let obj=
+							{
+								...complete[i],
+								password :password
+							};
+							array.push(obj);	
+						}
+						else
+						{
+							alert("old and new passwords are same");
+							return
+						}
+					}
+					else
+					{
+						array.push(complete[i]);
+						
+					}
+				}
+				
+				localStorage.setItem("data",JSON.stringify(array));
+				alert("password changed");
+				window.location.href = "libraryLoginPage.html";	
+				return
+			}			
+			else
+			{
+				alert("password is not matching");	
+			}	
+		}		
+</script>
+</html>

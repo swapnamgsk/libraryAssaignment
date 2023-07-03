@@ -1,0 +1,57 @@
+<html>
+<head>
+	<title>library home page</title>
+	<link rel = "stylesheet" href = "libraryHomePage.css"/>
+</head>
+<body>
+	<div id = "main">
+		<div id = "navbar">
+			<a id = "home" href = "libraryHomePage.html">Home</a>
+			<a href = "DetailsPage.html" id = "one">Add Book</a>
+			<a href = "AllbooksData.html" id = "two">All Books</a>
+			<a class = "a" onClick = change() id = "three">Sign up</a>
+		</div>
+		<h1>LIBRARY</h1><h2>WELCOME TO THE WORLD OF PEACE TO GET KNOWLEDGE</h2>
+		<div id = "text">"Libraries store the energy that fuels the imagination.<br> They open up windows to the world and inspire us to explore and achieve,<br>  and contribute to improving our quality of life."
+</div>
+	</div>
+</body>
+<script>
+
+	let signup = document.querySelector("#three");
+	let data = JSON.parse(localStorage.getItem("data")) || [];
+	let data1 = JSON.parse(localStorage.getItem("loggedUser")) || [];
+	let admin = (localStorage.getItem("AdminCode"));
+	
+	if(data1.admin == admin)
+	{
+		signup.innerText = "logOut";
+	}
+	else
+	{
+		signup.innerText = "Sign up"
+	}
+	
+	if(loggedUser)
+	{
+		signup.innerText = "logOut"
+	}
+	else
+	{	
+		let add = document.querySelector("#one");
+		//add.innerText = "   ";
+		signup.innerText = "Sign up"
+		//window.location.href = "libraryHomePage.html";
+		
+	}
+	
+	function change()
+	{
+		localStorage.removeItem("loggedUser");
+		window.location.href = "librarySigninPage.html";
+	}
+	
+	
+
+</script>	
+</html>

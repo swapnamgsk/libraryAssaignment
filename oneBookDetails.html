@@ -1,0 +1,252 @@
+<html>
+<head>
+	<title>One book</title>
+	<link rel = "stylesheet" href = "oneBookDetails.css"/>
+</head>
+<body>
+	<div>
+		<div id = "nav">
+			<div id = "navbar">
+				<a id = "home" href = "libraryHomePage.html">Home</a>
+				<a href = "DetailsPage.html" id = "one">Add Book</a>
+				<a href = "AllbooksData.html" id = "two">All Books</a>
+			</div>
+		</div>
+		<h2>Book Details</h2>
+		<div id = "container"></div>
+		<div id = "store"></div>
+	</div>
+</body>
+<script>		
+			
+			
+	let main = document.querySelector("#container");
+	let editstore = document.querySelector("#store");
+	
+	let allbooks = JSON.parse(localStorage.getItem("bookDetails")) || [];
+	let result = JSON.parse(localStorage.getItem("data")) || [];
+	
+	
+	let name = document.createElement("div");
+	name.innerText = "Name : " +result.name;
+	name.setAttribute("id","name");
+	
+	let publisher = document.createElement("div");
+	publisher.innerText = "publisher : " +result.publisher;
+	publisher.setAttribute("id","name");
+	
+	let img = document.createElement("img");
+	img.setAttribute("src",result.avatar);
+	let first = document.createElement("div");
+	first.append(img);
+	first.setAttribute("id","imgdiv");
+	
+	let author = document.createElement("div");
+	author.innerText ="author : " + result.author;
+	author.setAttribute("id","name");
+	
+	let price = document.createElement("div");
+	price.innerText = "price : " +result.price
+	price.setAttribute("id","name");
+	
+	let year = document.createElement("div");
+	year.innerText = "year : " +result.year;
+	year.setAttribute("id","name");
+	
+	let rate = document.createElement("div");
+	rate.innerText = "rate : " +result.rate;
+	rate.setAttribute("id","name");
+	
+	let serial_number = document.createElement("div");
+	serial_number.innerText = "serial_number : " +result.serial_number;
+	serial_number.setAttribute("id","name");
+	
+	let type = document.createElement("div");
+	type.innerText = "type : " +result.type;
+	type.setAttribute("id","name");
+	
+	let button1 = document.createElement("button");
+	button1.innerText = "Edit";
+	button1.setAttribute("id","edit");
+	
+	let button2 = document.createElement("button");
+	button2.innerText = "Delete";
+	button2.setAttribute("id","Delete");
+	
+	let min = document.createElement("div");
+	min.append(name,publisher,author,price,year,rate,serial_number,type, button1,button2);
+	let store = document.createElement("div");
+	store.append(min,first);
+	store.style.display = "flex";
+	main.append(store);
+	
+	
+	Delete.onclick = function()
+	{
+						let array = [];
+						for(let i = 0; i < allbooks.length; i++)
+						{
+							if(allbooks[i].serial_number != result.serial_number )
+							{
+								array.push(allbooks[i]);
+							}
+							else
+							{
+								console.log(allbooks[i],result);
+							}
+							
+						}
+						localStorage.removeItem(array);
+						alert("Successfully deleted");
+						localStorage.setItem("bookDetails",JSON.stringify(array));
+						window.location.href = "AllbooksData.html";			
+				
+	}
+	
+	
+			edit.onclick = function()
+			{
+				editstore.innerHTML = "";
+				main.innerText = "";
+				
+				let buttonTag =document.createElement("div");
+				let inputname = document.createElement("input");
+				inputname.setAttribute("type","text");
+				inputname.setAttribute("placeholder","Book Name");
+				inputname.setAttribute("class","Name");
+				inputname.setAttribute("value",result.name);
+				buttonTag.append(inputname);
+				
+				let authorTag =document.createElement("div");
+				let inputauthor = document.createElement("input");
+				inputauthor.setAttribute("type","text");
+				inputauthor.setAttribute("placeholder","Author name");
+				inputauthor.setAttribute("class","Author");
+				inputauthor.setAttribute("value",result.author);
+				authorTag.append(inputauthor);
+				
+				let priceTag =document.createElement("div");
+				let inputprice = document.createElement("input");
+				inputprice.setAttribute("type","number");
+				inputprice.setAttribute("placeholder","Price");
+				inputprice.setAttribute("class","Price");
+				inputprice.setAttribute("value",result.price);
+				priceTag.append(inputprice);
+				
+				let rateTag =document.createElement("div");
+				let inputrate = document.createElement("input");
+				inputrate.setAttribute("type","number");
+				inputrate.setAttribute("placeholder","Rating");
+				inputrate.setAttribute("class","Rate");
+				inputrate.setAttribute("value",result.rate);
+				rateTag.append(inputrate);
+				
+				let publisherTag =document.createElement("div");
+				let inputpublisher = document.createElement("input");
+				inputpublisher.setAttribute("type","text");
+				inputpublisher.setAttribute("placeholder","Publisher");
+				inputpublisher.setAttribute("class","Publisher");
+				inputpublisher.setAttribute("value",result.publisher);
+				publisherTag.append(inputpublisher);
+				
+				let serialnumberTag =document.createElement("div");
+				let inputserialnumber = document.createElement("input");
+				inputserialnumber.setAttribute("type","text");
+				inputserialnumber.setAttribute("placeholder","SerialNumber");
+				inputserialnumber.setAttribute("class","SerialNumber");
+				inputserialnumber.setAttribute("value",result.serial_number);
+				serialnumberTag.append(inputserialnumber);
+				
+				let yearTag =document.createElement("div");
+				let inputyear = document.createElement("input");
+				inputyear.setAttribute("type","number");
+				inputyear.setAttribute("placeholder","Year");
+				inputyear.setAttribute("class","Year");
+				inputyear.setAttribute("value",result.year);
+				yearTag.append(inputyear);
+				
+				/*let imgTag =document.createElement("div");
+				let inputimg = document.createElement("img");
+				inputimg.setAttribute("src",result.avatar);
+				imgTag.append(inputimg);
+				imgTag.setAttribute("class","image");*/
+				
+				
+				let img = document.createElement("img");
+				img.setAttribute("src",result.avatar);
+				let imgTag = document.createElement("div");
+				imgTag.append(img);
+				imgTag.setAttribute("class","imgdiv");
+							
+				
+				
+				
+					
+				
+				let typeTag =document.createElement("div");
+				let inputType = document.createElement("input");
+				inputType.setAttribute("type","text");
+				inputType.setAttribute("placeholder","Type");
+				inputType.setAttribute("class","Type");
+				inputType.setAttribute("value",result.type);
+				typeTag.append(inputType);
+				//let sucess = document.createElement("div");
+				let done = document.createElement("button");
+				done.innerText = "Done";
+				done.setAttribute("id","done");
+				//sucess.append(Done);
+				done.onclick = function()
+				{
+					let name = document.querySelector(".Name").value;
+					let author = document.querySelector(".Author").value;
+					let price = document.querySelector(".Price").value; 
+					let rate = document.querySelector(".Rate").value; 
+					let publisher = document.querySelector(".Publisher").value; 
+					let serialnumber = document.querySelector(".SerialNumber").value; 
+					let year = document.querySelector(".Year").value; 
+					let type = document.querySelector(".Type").value; 
+					let image = document.querySelector(".imgdiv").value;
+					let obj = {name,author,price,rate,publisher,serialnumber,year,type}
+						localStorage.setItem("data",JSON.stringify({...result, ...obj}))
+						
+						let array = [];
+						for(let i = 0; i < allbooks.length; i++)
+						{
+							if(allbooks[i].serial_number === result.serial_number )
+							{
+								array.push({...result , ...obj});
+							}
+							else
+							{
+								array.push(allbooks[i]);
+							}
+							
+							//delete function
+							Delete.onclick=function()
+							{
+								localStorage.removeItem(array);
+							}
+						}
+					
+						alert("Successfully edit");
+						localStorage.setItem("bookDetails",JSON.stringify(array));
+						window.location.href = "AllbooksData.html";			
+				}
+				
+				let edit = document.createElement("div");
+				edit.append(buttonTag,publisherTag,authorTag,priceTag,yearTag,rateTag,serialnumberTag,typeTag,done);
+				let bigStore = document.createElement("div"); 
+				bigStore.append(edit,imgTag);
+				
+				editstore.append(bigStore);
+				editstore.setAttribute("id","detailsStore");
+				main.append(editstore);
+			}
+			
+			
+			
+</script>
+	
+</html>
+
+
